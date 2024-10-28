@@ -4,6 +4,7 @@ import css from "styled-jsx/css";
 
 export const DATA = {
   name: "Arfaz Hussain",
+  nameVar: ["Arfaz", "আরফাজ", "عرفاز"],
   initials: "Arfaz",
   url: "https://arfazhxss.ca",
   location: "Victoria, British Columbia",
