@@ -1,0 +1,7 @@
+﻿services:
+  webapplication1:
+    image: webapplication1
+    build:
+      context: .
+      dockerfile: Dockerfile
+
