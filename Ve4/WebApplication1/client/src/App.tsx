@@ -50,7 +50,7 @@ const App: React.FC = () => {
                 className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
                 onClick={handleBackToList}
               >
-                My Blog
+               Arfaz&apos;s Blog 
               </h1>
             </div>
             <nav className="hidden md:flex space-x-8">
