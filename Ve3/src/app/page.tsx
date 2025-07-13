@@ -1,9 +1,11 @@
-import PreHeroTitle from "@/components/portfolio/section/pre-hero";
 // import FrontParticles from "@/components/portfolio/section/front-particles";
-import Hero from "@/components/portfolio/section/hero";
-import About from "@/components/portfolio/section/about";
 // import Education from "@/components/section/education";
 // import Work from "@/components/section/work";
+// import { WavesManualTest } from "@/components/ui/graphics/waves";
+// import { ThemeDebug } from "@/components/theme-debug";
+import PreHeroTitle from "@/components/portfolio/section/pre-hero";
+import Hero from "@/components/portfolio/section/hero";
+import About from "@/components/portfolio/section/about";
 import Skills from "@/components/portfolio/section/skills";
 import Projects from "@/components/portfolio/section/projects";
 import Contact from "@/components/portfolio/section/contact";
@@ -16,6 +18,8 @@ export default function Page() {
     <main className="w-screen h-screen overflow-hidden fixed inset-0 flex items-center justify-center"> 
       <FullscreenWaves />
       <MyLinkedTree />
+      {/* <ThemeDebug /> */}
+      {/* <WavesManualTest /> */}
       {/* <FrontParticles /> */}
       {/* <PreHeroTitle /> */}
       {/* <Hero /> */}
@@ -26,7 +30,7 @@ export default function Page() {
       {/* <Projects /> */}
       {/* <Hackathons /> */}
       {/* <Contact /> */}
-      {/* <Toaster /> */}
+      <Toaster />
     </main>
   );
 }

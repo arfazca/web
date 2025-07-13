@@ -1,9 +1,10 @@
 "use client"
 
 import type React from "react"
-import { useRef, useEffect, type CSSProperties } from "react"
+import { useRef, useEffect, type CSSProperties, useState } from "react"
+import { useTheme } from "next-themes"
 
-// Noise generation classes
+// Noise generation classes (keeping your existing classes)
 class Grad {
   x: number
   y: number
@@ -98,16 +99,6 @@ interface Point {
   wave: { x: number; y: number }
 }
 
-interface Config {
-  lineColor: string
-  waveSpeedX: number
-  waveSpeedY: number
-  waveAmpX: number
-  waveAmpY: number
-  xGap: number
-  yGap: number
-}
-
 interface WavesProps {
   lineColor?: string
   backgroundColor?: string
@@ -121,7 +112,7 @@ interface WavesProps {
   className?: string
 }
 
-// Waves Component
+// Waves Component with direct color reactivity
 const Waves: React.FC<WavesProps> = ({
   lineColor = "rgba(255, 255, 255, 0.3)",
   backgroundColor = "transparent",
@@ -137,37 +128,18 @@ const Waves: React.FC<WavesProps> = ({
   const containerRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
-  const boundingRef = useRef<{
-    width: number
-    height: number
-  }>({
-    width: 0,
-    height: 0,
-  })
+  const boundingRef = useRef<{ width: number; height: number }>({ width: 0, height: 0 })
   const noiseRef = useRef(new Noise(Math.random()))
   const linesRef = useRef<Point[][]>([])
-  const configRef = useRef<Config>({
-    lineColor,
-    waveSpeedX,
-    waveSpeedY,
-    waveAmpX,
-    waveAmpY,
-    xGap,
-    yGap,
-  })
   const frameIdRef = useRef<number | null>(null)
 
+  const currentLineColorRef = useRef(lineColor)
+  const currentBackgroundColorRef = useRef(backgroundColor)
+
   useEffect(() => {
-    configRef.current = {
-      lineColor,
-      waveSpeedX,
-      waveSpeedY,
-      waveAmpX,
-      waveAmpY,
-      xGap,
-      yGap,
-    }
-  }, [lineColor, waveSpeedX, waveSpeedY, waveAmpX, waveAmpY, xGap, yGap])
+    currentLineColorRef.current = lineColor
+    currentBackgroundColorRef.current = backgroundColor
+  }, [lineColor, backgroundColor])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -179,10 +151,7 @@ const Waves: React.FC<WavesProps> = ({
     function setSize() {
       if (!container || !canvas) return
       const rect = container.getBoundingClientRect()
-      boundingRef.current = {
-        width: rect.width,
-        height: rect.height,
-      }
+      boundingRef.current = { width: rect.width, height: rect.height }
       canvas.width = rect.width
       canvas.height = rect.height
     }
@@ -190,9 +159,8 @@ const Waves: React.FC<WavesProps> = ({
     function setLines() {
       const { width, height } = boundingRef.current
       linesRef.current = []
-      const oWidth = width + 200,
-        oHeight = height + 30
-      const { xGap, yGap } = configRef.current
+      const oWidth = width + 200
+      const oHeight = height + 30
       const totalLines = Math.ceil(oWidth / xGap)
       const totalPoints = Math.ceil(oHeight / yGap)
       const xStart = (width - xGap * totalLines) / 2
@@ -214,7 +182,6 @@ const Waves: React.FC<WavesProps> = ({
     function movePoints(time: number) {
       const lines = linesRef.current
       const noise = noiseRef.current
-      const { waveSpeedX, waveSpeedY, waveAmpX, waveAmpY } = configRef.current
 
       lines.forEach((pts) => {
         pts.forEach((p) => {
@@ -236,12 +203,26 @@ const Waves: React.FC<WavesProps> = ({
       const ctx = ctxRef.current
       if (!ctx) return
 
-      ctx.clearRect(0, 0, width, height)
+      const currentLineColor = currentLineColorRef.current
+      const currentBgColor = currentBackgroundColorRef.current
+
+      if (currentBgColor !== "transparent") {
+        ctx.fillStyle = currentBgColor
+        ctx.fillRect(0, 0, width, height)
+      } else {
+        ctx.clearRect(0, 0, width, height)
+      }
+
       ctx.beginPath()
-      ctx.strokeStyle = configRef.current.lineColor
+      ctx.strokeStyle = currentLineColor
+      ctx.lineWidth = 1
+
       linesRef.current.forEach((points) => {
+        if (points.length === 0) return
+
         let p1 = moved(points[0])
         ctx.moveTo(p1.x, p1.y)
+
         points.forEach((p, idx) => {
           const isLast = idx === points.length - 1
           p1 = moved(p)
@@ -277,7 +258,7 @@ const Waves: React.FC<WavesProps> = ({
         cancelAnimationFrame(frameIdRef.current)
       }
     }
-  }, [])
+  }, [waveSpeedX, waveSpeedY, waveAmpX, waveAmpY, xGap, yGap])
 
   return (
     <div
@@ -293,30 +274,115 @@ const Waves: React.FC<WavesProps> = ({
         height: "100vh",
         overflow: "hidden",
         zIndex: -1,
-        backgroundColor,
+        backgroundColor: backgroundColor,
         ...style,
       }}
     >
-      <canvas ref={canvasRef} className="waves-canvas" style={{ display: "block", width: "100%", height: "100%" }} />
+      <canvas
+        ref={canvasRef}
+        className="waves-canvas"
+        style={{
+          display: "block",
+          width: "100%",
+          height: "100%",
+        }}
+      />
     </div>
   )
 }
 
-export default function WavesDemo() {
-  const config = {
-    lineColor: "rgba(255, 255, 255, 0.3)",
-    backgroundColor: "#000000",
-    waveSpeedX: 0.0125,
-    waveSpeedY: 0.005,
-    waveAmpX: 32,
-    waveAmpY: 16,
-    xGap: 10,
-    yGap: 32,
+export default Waves
+
+export function WavesDemo() {
+  const { theme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return <div className="fixed inset-0 w-screen h-screen -z-50 bg-background" />
   }
+
+  const currentTheme = resolvedTheme || theme
+  const colors =
+    currentTheme === "dark"
+      ? {
+          lineColor: "rgba(255, 255, 255, 0.8)", // Keep the darker/more visible lines
+          backgroundColor: "#000000",
+        }
+      : {
+          lineColor: "rgba(0, 0, 0, 0.8)", // Keep the darker/more visible lines
+          backgroundColor: "#ffffff",
+        }
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
-      <Waves {...config} />
+      <Waves
+        lineColor={colors.lineColor}
+        backgroundColor={colors.backgroundColor}
+        waveSpeedX={0.0125}
+        waveSpeedY={0.005}
+        waveAmpX={32}
+        waveAmpY={16}
+        xGap={10}
+        yGap={32}
+      />
+    </div>
+  )
+}
+
+export function WavesManualTest() {
+  const [lineColor, setLineColor] = useState("rgba(255, 0, 0, 0.8)") 
+  const [backgroundColor, setBackgroundColor] = useState("#000000")
+
+  return (
+    <div className="relative w-screen h-screen overflow-hidden">
+      <Waves
+        lineColor={lineColor}
+        backgroundColor={backgroundColor}
+        waveSpeedX={0.0125}
+        waveSpeedY={0.005}
+        waveAmpX={32}
+        waveAmpY={16}
+        xGap={10}
+        yGap={32}
+      />
+
+      {/* Manual controls */}
+      <div className="fixed top-4 left-4 z-50 p-4 bg-white border rounded-lg shadow-lg">
+        <h3 className="font-semibold mb-2">Manual Color Test</h3>
+        <div className="space-y-2">
+          <button
+            className="block w-full p-2 bg-red-500 text-white rounded"
+            onClick={() => {
+              setLineColor("rgba(255, 0, 0, 0.8)")
+              setBackgroundColor("#000000")
+            }}
+          >
+            Red Lines on Black
+          </button>
+          <button
+            className="block w-full p-2 bg-blue-500 text-white rounded"
+            onClick={() => {
+              setLineColor("rgba(0, 0, 255, 0.8)")
+              setBackgroundColor("#ffffff")
+            }}
+          >
+            Blue Lines on White
+          </button>
+          <button
+            className="block w-full p-2 bg-green-500 text-white rounded"
+            onClick={() => {
+              setLineColor("rgba(0, 255, 0, 0.8)")
+              setBackgroundColor("#000000")
+            }}
+          >
+            Green Lines on Black
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

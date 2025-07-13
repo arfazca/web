@@ -71,10 +71,10 @@ export const DATA = {
       description: "Projects and Work Experience"
     },
     {
-      id: "2", 
-      title: "X / Twitter",
-      url: "https://x.arfaz.ca/",
-      description: "Follow me for tech updates and thoughts"
+      id: "2",
+      title: "Blog",
+      url: "https://arfazhxss.ca/blog",
+      description: "Technical articles and insights"
     },
     {
       id: "3",
@@ -89,10 +89,10 @@ export const DATA = {
       description: "Professional network and career updates"
     },
     {
-      id: "5",
-      title: "Blog",
-      url: "https://arfazhxss.ca/blog",
-      description: "Technical articles and insights"
+      id: "5", 
+      title: "X / Twitter",
+      url: "https://x.arfaz.ca/",
+      description: "Follow me for tech updates and thoughts"
     }
   ],
   work: [
