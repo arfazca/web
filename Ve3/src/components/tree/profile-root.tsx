@@ -84,7 +84,7 @@ export function MyLinkedTree() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <Card className="shadow-lg border backdrop-blur-lg bg-white/[0.03] dark:bg-black/[0.05] border-white/[0.08] dark:border-white/[0.03] rounded-xl">
+      <Card className="shadow-2xl border backdrop-blur-md bg-black/[0.01] dark:bg-black/[0.03] border-white/[0.01] dark:border-white/[0.005] rounded-xl">
         <CardContent className="p-8 space-y-8">
           <ProfileHeader profile={data.profile} />
           <LinksGrid links={[...data.links]} />

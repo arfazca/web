@@ -66,36 +66,30 @@ export const DATA = {
   links: [
     {
       id: "1",
-      title: "Personal Website",
-      url: "https://arfazhxss.ca",
-      description: "My portfolio showcasing projects and experience"
+      title: "Portfolio + Projects",
+      url: "https://portfolio.arfaz.ca",
+      description: "Projects and Work Experience"
     },
     {
       id: "2", 
       title: "X / Twitter",
-      url: "https://x.com/arfazhxss",
+      url: "https://x.arfaz.ca/",
       description: "Follow me for tech updates and thoughts"
     },
     {
       id: "3",
       title: "GitHub",
-      url: "https://github.com/arfazhxss",
+      url: "https://github.arfaz.ca/",
       description: "Open source projects and code repositories"
     },
     {
       id: "4",
       title: "LinkedIn",
-      url: "https://linkedin.com/in/arfazhussain",
+      url: "https://linkedin.arfaz.ca/",
       description: "Professional network and career updates"
     },
     {
       id: "5",
-      title: "Portfolio",
-      url: "https://arfazhxss.ca/portfolio",
-      description: "Detailed showcase of my work and projects"
-    },
-    {
-      id: "6",
       title: "Blog",
       url: "https://arfazhxss.ca/blog",
       description: "Technical articles and insights"
