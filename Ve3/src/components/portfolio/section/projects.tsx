@@ -1,9 +1,9 @@
 "use client";
 
 import { ProjectCard } from "@/components/project-card";
-import BlurFade from "@/components/magicui/blur-fade";
+import BlurFade from "@/components/ui/blur-fade";
 import { DATA } from "@/data/resume";
-import { useBlurFadeDelay } from "@/components/context/BlurFadeContext";
+import { useBlurFadeDelay } from "@/components/context/blur-fade-context";
 
 export default function Projects() {
     const blurFadeDelay = useBlurFadeDelay();

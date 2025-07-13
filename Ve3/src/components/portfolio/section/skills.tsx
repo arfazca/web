@@ -1,9 +1,9 @@
 "use client";
 
 import { DATA } from "@/data/resume";
-import BlurFade from "@/components/magicui/blur-fade";
+import BlurFade from "@/components/ui/blur-fade";
 import { Badge } from "@/components/ui/badge";
-import { useBlurFadeDelay } from "@/components/context/BlurFadeContext";
+import { useBlurFadeDelay } from "@/components/context/blur-fade-context";
 
 export default function Skills() {
     const blurFadeDelay = useBlurFadeDelay();

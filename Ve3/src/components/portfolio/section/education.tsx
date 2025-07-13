@@ -2,8 +2,8 @@
 
 import { DATA } from "@/data/resume";
 import { ResumeCard } from "@/components/resume-card";
-import BlurFade from "@/components/magicui/blur-fade";
-import { useBlurFadeDelay } from "@/components/context/BlurFadeContext";
+import BlurFade from "@/components/ui/blur-fade";
+import { useBlurFadeDelay } from "@/components/context/blur-fade-context";
 
 export default function Education() {
     const blurFadeDelay = useBlurFadeDelay();

@@ -1,10 +1,10 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useBlurFadeDelay } from "@/components/context/BlurFadeContext";
+import { useBlurFadeDelay } from "@/components/context/blur-fade-context";
 import { DATA } from "@/data/resume";
-import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
+import BlurFade from "@/components/ui/blur-fade";
+import BlurFadeText from "@/components/ui/blur-fade-text";
 
 export default function Hero() {
     const blurFadeDelay = useBlurFadeDelay();

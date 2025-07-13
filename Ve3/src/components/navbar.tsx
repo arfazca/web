@@ -1,4 +1,4 @@
-import { Dock, DockIcon } from "@/components/magicui/dock";
+import { Dock, DockIcon } from "@/components/ui/dock";
 import { ModeToggle } from "@/components/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";

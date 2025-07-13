@@ -1,8 +1,8 @@
 "use client";
 
-import BlurFade from "@/components/magicui/blur-fade";
+import BlurFade from "@/components/ui/blur-fade";
 import ContactForm from "@/components/contact-form";
-import { useBlurFadeDelay } from "@/components/context/BlurFadeContext";
+import { useBlurFadeDelay } from "@/components/context/blur-fade-context";
 
 export default function Contact() {
     const blurFadeDelay = useBlurFadeDelay();
