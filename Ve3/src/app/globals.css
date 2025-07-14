@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "katex/dist/katex.min.css";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -216,21 +217,52 @@
   }
   
   pre {
-    @apply !px-0 rounded-lg overflow-x-auto py-4
+    @apply !px-0 rounded-lg overflow-x-auto py-4;
+    background-color: hsl(var(--muted)) !important;
+    border: 1px solid hsl(var(--border)) !important;
   }
    
   pre [data-line] {
     @apply px-4
   }
 
+  /* Fix inline code - this is the main fix */
   code {
     @apply text-sm md:text-base !leading-loose;
+    counter-reset: line;
+    font-family: monospace;
+    background-color: hsl(var(--muted)) !important;
+    color: hsl(var(--foreground)) !important;
+    padding: 2px 4px;
+    border-radius: 3px;
+    border: 1px solid hsl(var(--border));
   }
-  
+
+  /* Remove backticks from prose inline code */
+  .prose code:not([data-theme]):before,
+  .prose code:not([data-theme]):after {
+    content: "" !important;
+  }
+
+  /* Ensure prose inline code uses theme colors */
+  .prose code:not([data-theme]) {
+    background-color: hsl(var(--muted)) !important;
+    color: hsl(var(--foreground)) !important;
+    border: 1px solid hsl(var(--border)) !important;
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+    font-weight: normal !important;
+  }
+
+  /* Code blocks inside pre should not have background */
   pre > code {
     counter-reset: line;
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
   }
   
+  /* Shiki theme code blocks */
   code[data-theme*=" "],
   code[data-theme*=" "] span {
     color: var(--shiki-light);
@@ -255,76 +287,166 @@
     @apply inline-block w-4 mr-4 text-right text-gray-500;
   }
  
-  code {
-    counter-reset: line;
+  code > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 1rem;
+    margin-right: 2rem;
+    text-align: right;
+    color: gray;
   }
  
-  code > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
+  code[data-line-numbers-max-digits="2"] > [data-line]::before {
+    width: 2rem;
+  }
  
-  /* Other styling */
-  display: inline-block;
-  width: 1rem;
-  margin-right: 2rem;
-  text-align: right;
-  color: gray;
-}
- 
-code[data-line-numbers-max-digits="2"] > [data-line]::before {
-  width: 2rem;
-}
- 
-code[data-line-numbers-max-digits="3"] > [data-line]::before {
-  width: 3rem;
-}
+  code[data-line-numbers-max-digits="3"] > [data-line]::before {
+    width: 3rem;
+  }
 
-.blob.green {
-    border-radius: 50%;
-    margin: 10px;
-    height: 20px;
-    width: 20px;
-    transform: scale(1);
-    background: rgb(32 243 194);
-    box-shadow: 0 0 0 0 rgba(51, 217, 178, 1);
-    animation: pulse-green 2s infinite, change-color 4s infinite;
-}
+  .blob.green {
+      border-radius: 50%;
+      margin: 10px;
+      height: 20px;
+      width: 20px;
+      transform: scale(1);
+      background: rgb(32 243 194);
+      box-shadow: 0 0 0 0 rgba(51, 217, 178, 1);
+      animation: pulse-green 2s infinite, change-color 4s infinite;
+  }
 
-@keyframes pulse-green {
-    0% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(78, 238, 200, 0.814);
-    }
-
-    70% {
-        transform: scale(1);
-        box-shadow: 0 0 0 10px rgba(51, 217, 178, 0);
-    }
-
-    100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(51, 217, 178, 0);
-    }
+  /* Clean KaTeX styling - NO BACKGROUNDS */
+.katex-display {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;
+  background: transparent !important; /* No background */
+  border: none !important; /* No border */
+  padding: 1rem 0; /* Only vertical padding */
 }
 
-@keyframes change-color {
-    0%, 100% {
-        background: rgb(32, 243, 194);
-        /* box-shadow: 0 0 0 0 rgba(32, 243, 194, 0.814); */
-    }
-
-    25% {
-        background: rgb(46, 204, 113);
-        /* box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.814); */
-    }
-
-    50% {
-        background: rgb(39, 174, 96);
-        /* box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.814); */
-    }
-
-    75% {
-        background: rgb(0, 230, 118);
-        /* box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.814); */
-    }
+.katex {
+  font-size: 1.1em;
+  color: hsl(var(--foreground)) !important; /* Use theme text color */
 }
+
+/* KaTeX inline math - NO BACKGROUND */
+.katex:not(.katex-display) {
+  background: transparent !important; /* No background */
+  padding: 0 !important; /* No padding */
+  border: none !important; /* No border */
+  color: hsl(var(--foreground)) !important; /* Use theme text color */
+}
+
+/* Remove any dark mode KaTeX backgrounds */
+.dark .katex-display {
+  background: transparent !important;
+}
+
+.dark .katex:not(.katex-display) {
+  background: transparent !important;
+}
+
+/* Override any KaTeX default backgrounds */
+.katex .base,
+.katex .strut,
+.katex .mathnormal,
+.katex .mathit,
+.katex .mathrm {
+  background: transparent !important;
+}
+
+/* French typography improvements */
+.prose.lang-fr {
+    quotes: "« " " »" "‹ " " ›";
+  }
+
+  .prose.lang-fr q::before {
+    content: "« ";
+  }
+
+  .prose.lang-fr q::after {
+    content: " »";
+  }
+
+  /* Blog post improvements */
+  .prose {
+    max-width: none;
+  }
+
+  .prose pre {
+    border-radius: 0.5rem;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--muted)) !important;
+  }
+
+  .prose img {
+    border-radius: 0.5rem;
+    border: 1px solid hsl(var(--border));
+  }
+
+  .prose blockquote {
+    border-left: 4px solid hsl(var(--primary));
+    padding-left: 1rem;
+    font-style: italic;
+  }
+
+  /* Table of contents */
+  .toc {
+    background: hsl(var(--muted));
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .toc ul {
+    list-style: none;
+    padding-left: 1rem;
+  }
+
+  .toc a {
+    text-decoration: none;
+    color: hsl(var(--muted-foreground));
+    transition: color 0.2s;
+  }
+
+  .toc a:hover {
+    color: hsl(var(--primary));
+  }
+
+  @keyframes pulse-green {
+      0% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(78, 238, 200, 0.814);
+      }
+
+      70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 10px rgba(51, 217, 178, 0);
+      }
+
+      100% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(51, 217, 178, 0);
+      }
+  }
+
+  @keyframes change-color {
+      0%, 100% {
+          background: rgb(32, 243, 194);
+      }
+
+      25% {
+          background: rgb(46, 204, 113);
+      }
+
+      50% {
+          background: rgb(39, 174, 96);
+      }
+
+      75% {
+          background: rgb(0, 230, 118);
+      }
+  }

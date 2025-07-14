@@ -5,6 +5,8 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import { unified } from "unified";
 import calculateReadingTime from "@/lib/readingTime";
 
@@ -14,7 +16,10 @@ type Metadata = {
   summary: string;
   image?: string;
   readingTime: string;
-  [key: string]: any; // This allows for additional properties
+  lang?: string; 
+  tags?: string[];
+  author?: string; 
+  [key: string]: any;
 };
 
 function getMDXFiles(dir: string) {
@@ -24,9 +29,10 @@ function getMDXFiles(dir: string) {
 export async function markdownToHTML(markdown: string) {
   const p = await unified()
     .use(remarkParse)
+    .use(remarkMath) 
     .use(remarkRehype)
+    .use(rehypeKatex) 
     .use(rehypePrettyCode, {
-      // https://rehype-pretty.pages.dev/#usage
       theme: {
         light: "min-light",
         dark: "min-dark",

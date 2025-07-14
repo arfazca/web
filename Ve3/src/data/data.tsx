@@ -36,13 +36,13 @@ export const DATA = {
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://github.com/arfazhxss",
+        url: "https://github.com/arfazca",
         icon: Icons.github,
         navbar: true,
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "https://linkedin.com/in/arfazhussain",
+        url: "https://linkedin.com/in/arfazca",
         icon: Icons.linkedin,
         navbar: true,
       },
@@ -64,31 +64,31 @@ export const DATA = {
     {
       id: "1",
       title: "Portfolio + Projects",
-      url: "https://portfolio.arfaz.ca",
+      url: "/portfolio",
       description: "Projects and Work Experience"
     },
     {
       id: "2",
       title: "Blog",
-      url: "https://arfazhxss.ca/blog",
+      url: "/blog",
       description: "Technical articles and insights"
     },
     {
       id: "3",
       title: "GitHub",
-      url: "https://github.arfaz.ca/",
+      url: "https://github.com/arfazca",
       description: "Open source projects and code repositories"
     },
     {
       id: "4",
       title: "LinkedIn",
-      url: "https://linkedin.arfaz.ca/",
+      url: "https://linkedin.com/in/arfazca",
       description: "Professional network and career updates"
     },
     {
       id: "5", 
       title: "X / Twitter",
-      url: "https://x.arfaz.ca/",
+      url: "https://x.com/arfazca",
       description: "Follow me for tech updates and thoughts"
     }
   ],
