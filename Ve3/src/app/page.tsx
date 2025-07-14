@@ -15,7 +15,8 @@ import FullscreenWaves from "@/components/portfolio/section/bg-waves";
 
 export default function Page() {
   return (
-    <main className="w-screen h-screen overflow-hidden fixed inset-0 flex items-center justify-center"> 
+    <main className="w-full min-h-screen relative overflow-auto flex md:items-center md:justify-center md:py-0 md:px-0 md:w-screen md:h-screen md:overflow-hidden md:fixed md:inset-0"> 
+      {/* <main className="w-screen h-screen overflow-hidden fixed inset-0 flex items-center justify-center"> */}
       <FullscreenWaves />
       <MyLinkedTree />
       {/* <ThemeDebug /> */}
