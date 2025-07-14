@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { BlurFadeProvider } from "@/components/context/blur-fade-context";
-import "./globals.css";
+import "@/app/globals.css";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -15,14 +15,11 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
-  title: {
-    default: DATA.name,
-    template: `%s | ${DATA.name}`,
-  },
-  description: DATA.description,
+  title: `Portfolio`,
+  description: "Explore my projects, skills, and professional experience.",
   openGraph: {
-    title: `${DATA.name}`,
-    description: DATA.description,
+    title: `Portfolio`,
+    description: "Explore my projects, skills, and professional experience.",
     url: DATA.url,
     siteName: `${DATA.name}`,
     locale: "en_US",
@@ -57,28 +54,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function PortfolioLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
-          fontSans.variable
-        )}
-      >
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          <BlurFadeProvider>
-            <TooltipProvider delayDuration={0}>
-              {children}
-              <Navbar />
-            </TooltipProvider>
-          </BlurFadeProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <div className="portfolio-layout">
+      {children}
+    </div>
   );
 }

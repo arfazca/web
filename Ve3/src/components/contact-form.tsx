@@ -41,7 +41,7 @@ export default function ContactForm() {
 
     return (
         <ToastProvider>
-            <Card className="w-full max-w-2xl mx-auto shadow-lg py-4">
+            <Card className="w-full max-w-2xl mx-auto py-5 bg-white/1 backdrop-blur-md border-0 rounded-xl">
                 <form onSubmit={handleSubmit}>
                     <CardContent className="space-y-2 px-3">
                         <div className="grid grid-cols-2 gap-2">

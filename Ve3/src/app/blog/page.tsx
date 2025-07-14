@@ -1,10 +1,10 @@
-import BlurFade from "@/components/magicui/blur-fade";
+import BlurFade from "@/components/ui/blur-fade";
 import { getBlogPosts } from "@/data/blog";
 import Link from "next/link";
 
 export const metadata = {
   title: "Blog",
-  description: "My thoughts on software development, life, and more.",
+  description: "Thoughts, stories and ideas.",
 };
 
 const BLUR_FADE_DELAY = 0.04;
@@ -12,35 +12,73 @@ const BLUR_FADE_DELAY = 0.04;
 export default async function BlogPage() {
   const posts = await getBlogPosts();
 
+  // Group posts by year
+  const postsByYear = posts
+    .sort((a, b) => {
+      if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
+        return -1;
+      }
+      return 1;
+    })
+    .reduce((acc, post) => {
+      const year = new Date(post.metadata.publishedAt).getFullYear();
+      if (!acc[year]) {
+        acc[year] = [];
+      }
+      acc[year].push(post);
+      return acc;
+    }, {} as Record<number, typeof posts>);
+
   return (
-    <section>
-      <BlurFade delay={BLUR_FADE_DELAY}>
-        <h1 className="font-medium text-2xl mb-8 tracking-tighter">Arfaz&apos;s Blogs</h1>
-      </BlurFade>
-      {posts
-        .sort((a, b) => {
-          if (
-            new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
-          ) {
-            return -1;
-          }
-          return 1;
-        })
-        .map((post, id) => (
-          <BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={post.slug}>
-            <Link
-              className="flex flex-col space-y-1 mb-4"
-              href={`/blog/${post.slug}`}
-            >
-              <div className="w-full flex flex-col">
-                <p className="tracking-tight">{post.metadata.title}</p>
-                <p className="h-6 text-xs text-muted-foreground">
-                  {post.metadata.publishedAt}
-                </p>
-              </div>
-            </Link>
-          </BlurFade>
+    <>
+      {/* Header Section */}
+      <section className="gap-0 mb-8">
+        <BlurFade delay={BLUR_FADE_DELAY}>
+          <h1 className="font-medium text-2xl mb-2 tracking-tighter">Blog</h1>
+          <p className="text-muted-foreground">Thoughts, stories and ideas.</p>
+        </BlurFade>
+      </section>
+
+      {/* Posts by Year */}
+      {Object.entries(postsByYear)
+        .sort(([a], [b]) => Number(b) - Number(a))
+        .map(([year, yearPosts], index) => (
+          <section key={year} className="mb-8">
+            {/* Year Header */}
+            <BlurFade delay={BLUR_FADE_DELAY * 2 + index * 0.2}>
+              <h2 className="font-normal text-muted-foreground text-sm mb-6">
+                {year}
+              </h2>
+            </BlurFade>
+            
+            {/* Posts List */}
+            <ul className="grid gap-6">
+              {yearPosts.map((post, postIndex) => (
+                <li key={post.slug}>
+                  <BlurFade delay={BLUR_FADE_DELAY * 3 + index * 0.2 + postIndex * 0.05}>
+                    <Link
+                      className="flex items-center justify-between group hover:bg-accent/50 rounded-lg p-2 -m-2 transition-colors"
+                      href={`/blog/${post.slug}`}
+                    >
+                      <div className="flex items-center gap-4 flex-1">
+                        <p className="tracking-tight group-hover:text-primary transition-colors">
+                          {post.metadata.title}
+                        </p>
+                        <div className="flex-1 border-b border-dotted border-muted-foreground/30"></div>
+                        <p className="text-xs text-muted-foreground">
+                          {new Intl.DateTimeFormat('en-US', { 
+                            month: 'long', 
+                            day: 'numeric' 
+                          }).format(new Date(post.metadata.publishedAt))}
+                        </p>
+                      </div>
+                    </Link>
+                  </BlurFade>
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
-    </section>
+    </>
   );
 }

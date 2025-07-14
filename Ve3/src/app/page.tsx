@@ -1,31 +1,36 @@
-import PreHeroTitle from "@/components/section/pre-hero";
-import FrontParticles from "@/components/section/front-particles";
-import Hero from "@/components/section/hero";
-import About from "@/components/section/about";
+// import FrontParticles from "@/components/portfolio/section/front-particles";
 // import Education from "@/components/section/education";
 // import Work from "@/components/section/work";
-import Skills from "@/components/section/skills";
-import Projects from "@/components/section/projects";
-// import Hackathons from "@/components/section/hackathons";
-import Contact from "@/components/section/contact";
-// import Timeline from "@/components/section/timeline";
+// import { WavesManualTest } from "@/components/ui/graphics/waves";
+// import { ThemeDebug } from "@/components/theme-debug";
+import PreHeroTitle from "@/components/portfolio/section/pre-hero";
+import Hero from "@/components/portfolio/section/hero";
+import About from "@/components/portfolio/section/about";
+import Skills from "@/components/portfolio/section/skills";
+import Projects from "@/components/portfolio/section/projects";
+import Contact from "@/components/portfolio/section/contact";
+import { MyLinkedTree } from "@/components/tree/profile-root";
 import { Toaster } from "@/components/ui/toaster";
+import FullscreenWaves from "@/components/portfolio/section/bg-waves";
 
 export default function Page() {
   return (
-    <main className="flex flex-col min-h-[100dvh] space-y-10">
-      <FrontParticles />
-      <PreHeroTitle />
-      <Hero />
-      <About />
-      {/* <Timeline /> */}
+    <main className="w-screen h-screen overflow-hidden fixed inset-0 flex items-center justify-center"> 
+      <FullscreenWaves />
+      <MyLinkedTree />
+      {/* <ThemeDebug /> */}
+      {/* <WavesManualTest /> */}
+      {/* <FrontParticles /> */}
+      {/* <PreHeroTitle /> */}
+      {/* <Hero /> */}
+      {/* <About /> */}
       {/* <Education /> */}
       {/* <Work /> */}
-      <Skills />
-      <Projects />
+      {/* <Skills /> */}
+      {/* <Projects /> */}
       {/* <Hackathons /> */}
-      <Contact />
+      {/* <Contact /> */}
       <Toaster />
-    </main >
+    </main>
   );
 }

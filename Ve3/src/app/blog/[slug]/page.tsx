@@ -1,5 +1,5 @@
 import { getBlogPosts, getPost } from "@/data/blog";
-import { DATA } from "@/data/resume";
+import { DATA } from "@/data/data";
 import { formatDate } from "@/lib/utils";
 import type { Metadata as NextMetadata } from 'next';
 import { notFound } from "next/navigation";
