@@ -1,7 +1,7 @@
 "use client";
 import BlurFade from "@/components/ui/blur-fade";
 import { ResumeCard } from "@/components/resume-card";
-import { DATA } from "@/data/resume";
+import { DATA } from "@/data/data";
 import { useBlurFadeDelay } from "@/components/context/blur-fade-context";
 
 export default function Work() {

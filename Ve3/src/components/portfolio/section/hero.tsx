@@ -2,7 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useBlurFadeDelay } from "@/components/context/blur-fade-context";
-import { DATA } from "@/data/resume";
+import { DATA } from "@/data/data";
 import BlurFade from "@/components/ui/blur-fade";
 import BlurFadeText from "@/components/ui/blur-fade-text";
 
@@ -17,7 +17,7 @@ export default function Hero() {
                             delay={blurFadeDelay}
                             className="text-2xl font-bold tracking-tighter sm:text-5xl xl:text-5xl/none"
                             yOffset={8}
-                            text={`I usually go by ${DATA.name.split(" ")[0]}`}
+                            text={`Moi c'est ${DATA.name.split(" ")[0]}!`}
                         />
                         <BlurFadeText
                             className="max-w-[600px] md:text-x font-light text-lg/relaxed"

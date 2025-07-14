@@ -2,7 +2,7 @@
 
 import { ProjectCard } from "@/components/project-card";
 import BlurFade from "@/components/ui/blur-fade";
-import { DATA } from "@/data/resume";
+import { DATA } from "@/data/data";
 import { useBlurFadeDelay } from "@/components/context/blur-fade-context";
 
 export default function Projects() {
@@ -13,11 +13,11 @@ export default function Projects() {
                 <BlurFade delay={blurFadeDelay * 23}>
                     <div className="flex flex-col items-center justify-center space-y-4 text-center">
                         <div className="space-y-2">
-                            <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                            {/* <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
                                 My Projects
-                            </div>
+                            </div> */}
                             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                                Some of my latest projects
+                                Stuff I&apos;ve been involved in 
                             </h2>
                             <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                                 I&apos;ve worked on a variety of projects, from simple

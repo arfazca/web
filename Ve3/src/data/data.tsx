@@ -9,25 +9,22 @@ export const DATA = {
   location: "Victoria, British Columbia",
   locationLink: "https://www.google.com/maps/place/sanfrancisco",
   description:
-    "I am a full-stack developer with 3+ years of experience, primarily focused on developing cloud and backend processes 🔧⚙️",
+    "I am a software developer focused on developing systems and backend processes",
   summary:
     "I have a passion for developing systems and automating processes. I have extensive experience with Java, Python, SQL, and TypeScript, which has provided me with a solid understanding of various frameworks and databases. I am proficient in working with tools such as Node.js, React, and PostgreSQL, and excel at integrating them to develop robust, efficient systems. I also have a keen interest in low-level, embedded and firmware engineering!",
   avatarUrl: "/me.png",
   skills: [
+    "C#",
+    "Python",
+    "Swift",
     "React",
     "Next.js",
     "Typescript",
-    "Node.js",
-    "Python",
-    "Swift",
+    "TailwindCSS",
     "PostgreSQL",
-    "Docker",
-    "Kubernetes",
+    "Node.js",
     "Java",
-    "Embedded C",
     "C++",
-    "Adobe",
-    "Figma"
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -162,7 +159,7 @@ export const DATA = {
       technologies: ["Python", "Flask", "REST APIs", "Microservices", "UML", "Design Patterns"],
       links: [
         {
-          type: "GitHub",
+          type: "",
           href: "https://github.com/arfazhxss/mister-ed",
           icon: <Icons.github className="size-3" />
         }

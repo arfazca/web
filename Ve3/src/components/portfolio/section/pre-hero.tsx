@@ -28,7 +28,7 @@ export default function PreHeroTitle() {
                         sm:top-[calc(10%-100px)]      /* Small screens */
                         md:top-[calc(10%-100px)]      /* Medium screens */
                         lg:top-[calc(10%-100px)]     /* Large screens */
-                        flex flex-row slide-out-to-left-1/2 items-center pr-8 animate-fade-in delay-[10s] z-10">
+                        flex flex-row slide-out-to-left-1/2 items-center pr-8 animate-fade-in [animation-delay:10s] z-10">
                     <div className="blob green"></div>
                     <p className="font-medium 
                         text-sm 
@@ -60,7 +60,7 @@ export default function PreHeroTitle() {
                         md:top-[calc(25%+47px)]     /* Medium screens */
                         lg:top-[calc(25%+65px)]     /* Large screens */
                         animate-fade-in 
-                        delay-[10s] 
+                        [animation-delay:10s] 
                         flex 
                         gap-2">
                     <p className="flex
@@ -77,7 +77,7 @@ export default function PreHeroTitle() {
                         sm:top-[calc(25%+70px)]     /* Small screens */
                         md:top-[calc(25%+90px)]     /* Medium screens */
                         lg:top-[calc(25%+115px)]    /* Large screens */
-                        animate-fade-in delay-[10s] flex gap-2">
+                        animate-fade-in [animation-delay:10s] flex gap-2">
                     <Button asChild variant={'outline'} size="sm">
                         <Link href="/resume">
                             View Resume <ArrowUpRightIcon className="ml-2 size-4" />

@@ -1,6 +1,6 @@
 "use client";
 
-import { DATA } from "@/data/resume";
+import { DATA } from "@/data/data";
 import { ResumeCard } from "@/components/resume-card";
 import BlurFade from "@/components/ui/blur-fade";
 import { useBlurFadeDelay } from "@/components/context/blur-fade-context";

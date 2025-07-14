@@ -7,7 +7,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { DATA } from "@/data/resume";
+import { DATA } from "@/data/data";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 

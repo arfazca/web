@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { ProfileHeader } from "@/components/tree/profile-header"
 import { LinksGrid } from "@/components/tree/profile-link-grid"
-import { DATA } from "@/data/resume"
+import { DATA } from "@/data/data"
 import type { ProfileData } from "@/types"
 
 export function MyLinkedTree() {
