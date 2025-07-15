@@ -19,7 +19,6 @@ export function MyLinkedTree() {
         const profileData: ProfileData = {
           profile: DATA.profile,
           links: DATA.links,
-          // theme: DATA.theme
         }
         
         setData(profileData)
@@ -83,21 +82,23 @@ export function MyLinkedTree() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <Card className="shadow-2xl border backdrop-blur-md bg-black/[0.01] dark:bg-black/[0.03] border-white/[0.01] dark:border-white/[0.005] rounded-xl">
-        <CardContent className="p-8 space-y-8">
-          <ProfileHeader profile={data.profile} />
-          <LinksGrid links={[...data.links]} />
-            <div className="text-center text-xs text-muted-foreground space-y-2">
-              <span className="text-sm">🌲⛴️🏂</span>
-              <div className="text-center text-xs text-muted-foreground flex items-center justify-center gap-1">
-                <span>{currentTime} Pacific Standard Time</span>
-                <span className="text-[9px]">|</span>
-                <span>© {currentYear} All rights reserved.</span>
-              </div>
+    <Card className="shadow-2xl border backdrop-blur-md 
+      bg-black/[0.01] dark:bg-black/[0.03] border-white/[0.01] 
+      dark:border-white/[0.005] rounded-none sm:rounded-xl w-full 
+      h-full flex flex-col justify-center sm:w-auto sm:h-auto sm:mx-auto">
+      <CardContent className="px-2 pt-2 pb-20 space-y-8 w-full max-w-md mx-auto flex flex-col items-center sm:p-8">
+        <ProfileHeader profile={data.profile} />
+        <LinksGrid links={[...data.links]} />
+          <div className="text-center text-xs text-muted-foreground space-y-1">
+            <span className="text-sm">🌲⛴️🏂</span>
+            <div className="text-center text-xs text-muted-foreground flex items-center justify-center gap-1">
+              <span>{currentTime} <span className="hidden min-[380px]:inline">Pacific Standard Time</span>
+              <span className="min-[380px]:hidden">PST</span></span>
+              <span className="text-[9px]">|</span>
+              <span>© {currentYear} All rights reserved.</span>
             </div>
-        </CardContent>
-      </Card>
-    </div>
+          </div>
+      </CardContent>
+    </Card>
   )
 }
