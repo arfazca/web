@@ -57,14 +57,30 @@ export default async function BlogPage() {
                 <li key={post.slug}>
                   <BlurFade delay={BLUR_FADE_DELAY * 3 + index * 0.2 + postIndex * 0.05}>
                     <Link
-                      className="flex items-center justify-between group hover:bg-accent/50 rounded-lg p-2 -m-2 transition-colors"
+                      className="flex group hover:bg-accent/50 rounded-lg p-2 -m-2 transition-colors"
                       href={`/blog/${post.slug}`}
                     >
-                      <div className="flex items-center gap-4 flex-1">
-                        <p className="tracking-tight group-hover:text-primary transition-colors">
+                      {/* Desktop layout: title...date (640px and larger) */}
+                      <div className="hidden sm:flex items-center justify-between w-full">
+                        <div className="flex items-center gap-4 flex-1">
+                          <p className="tracking-tight group-hover:text-primary transition-colors">
+                            {post.metadata.title}
+                          </p>
+                          <div className="flex-1 border-b border-dotted border-muted-foreground/30"></div>
+                          <p className="text-xs text-muted-foreground">
+                            {new Intl.DateTimeFormat('en-US', { 
+                              month: 'long', 
+                              day: 'numeric' 
+                            }).format(new Date(post.metadata.publishedAt))}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Mobile layout: title on top, date below (below 640px) */}
+                      <div className="flex sm:hidden flex-col w-full">
+                        <p className="tracking-tight group-hover:text-primary transition-colors mb-1">
                           {post.metadata.title}
                         </p>
-                        <div className="flex-1 border-b border-dotted border-muted-foreground/30"></div>
                         <p className="text-xs text-muted-foreground">
                           {new Intl.DateTimeFormat('en-US', { 
                             month: 'long', 

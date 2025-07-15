@@ -226,7 +226,6 @@
     @apply px-4
   }
 
-  /* Fix inline code - this is the main fix */
   code {
     @apply text-sm md:text-base !leading-loose;
     counter-reset: line;
@@ -316,31 +315,28 @@
       animation: pulse-green 2s infinite, change-color 4s infinite;
   }
 
-  /* Clean KaTeX styling - NO BACKGROUNDS */
 .katex-display {
   margin: 1.5rem 0;
   overflow-x: auto;
   overflow-y: hidden;
   text-align: center;
-  background: transparent !important; /* No background */
-  border: none !important; /* No border */
-  padding: 1rem 0; /* Only vertical padding */
+  background: transparent !important; 
+  border: none !important; 
+  padding: 1rem 0; 
 }
 
 .katex {
   font-size: 1.1em;
-  color: hsl(var(--foreground)) !important; /* Use theme text color */
+  color: hsl(var(--foreground)) !important; 
 }
 
-/* KaTeX inline math - NO BACKGROUND */
 .katex:not(.katex-display) {
-  background: transparent !important; /* No background */
-  padding: 0 !important; /* No padding */
-  border: none !important; /* No border */
-  color: hsl(var(--foreground)) !important; /* Use theme text color */
+  background: transparent !important; 
+  padding: 0 !important; 
+  border: none !important; 
+  color: hsl(var(--foreground)) !important; 
 }
 
-/* Remove any dark mode KaTeX backgrounds */
 .dark .katex-display {
   background: transparent !important;
 }
@@ -349,7 +345,6 @@
   background: transparent !important;
 }
 
-/* Override any KaTeX default backgrounds */
 .katex .base,
 .katex .strut,
 .katex .mathnormal,
@@ -358,7 +353,16 @@
   background: transparent !important;
 }
 
-/* French typography improvements */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .prose.lang-fr {
     quotes: "« " " »" "‹ " " ›";
   }
@@ -371,7 +375,6 @@
     content: " »";
   }
 
-  /* Blog post improvements */
   .prose {
     max-width: none;
   }
@@ -393,7 +396,6 @@
     font-style: italic;
   }
 
-  /* Table of contents */
   .toc {
     background: hsl(var(--muted));
     border-radius: 0.5rem;

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { getShikiHighlighter } from "@/lib/shiki";
 
 function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
   let headers = data.headers.map((header, index) => (
@@ -51,11 +52,11 @@ function slugify(str: string) {
   return str
     .toString()
     .toLowerCase()
-    .trim() // Remove whitespace from both ends of a string
-    .replace(/\s+/g, "-") // Replace spaces with -
-    .replace(/&/g, "-and-") // Replace & with 'and'
-    .replace(/[^\w\-]+/g, "") // Remove all non-word characters except for -
-    .replace(/\-\-+/g, "-"); // Replace multiple - with single -
+    .trim() 
+    .replace(/\s+/g, "-") 
+    .replace(/&/g, "-and-") 
+    .replace(/[^\w\-]+/g, "") 
+    .replace(/\-\-+/g, "-"); 
 }
 
 function createHeading(level: number) {
@@ -78,6 +79,29 @@ function createHeading(level: number) {
   return Heading;
 }
 
+async function CodeBlock({ children, className, ...props }: any) {
+  const language = className?.replace(/language-/, "") || "text";
+
+  if (typeof children === "string") {
+    const highlighter = await getShikiHighlighter();
+    const html = highlighter.codeToHtml(children.trim(), {
+      lang: language,
+      themes: {
+        light: "github-light",
+        dark: "github-dark",
+      },
+    });
+
+    return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  }
+
+  return (
+    <code className={className} {...props}>
+      {children}
+    </code>
+  );
+}
+
 export const globalComponents = {
   h1: createHeading(1),
   h2: createHeading(2),
@@ -88,4 +112,6 @@ export const globalComponents = {
   Image: RoundedImage,
   a: CustomLink,
   Table,
+  code: CodeBlock, 
+  pre: ({ children }: any) => children, 
 };

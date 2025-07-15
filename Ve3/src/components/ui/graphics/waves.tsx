@@ -4,7 +4,6 @@ import type React from "react"
 import { useRef, useEffect, type CSSProperties, useState } from "react"
 import { useTheme } from "next-themes"
 
-// Noise generation classes (keeping your existing classes)
 class Grad {
   x: number
   y: number
