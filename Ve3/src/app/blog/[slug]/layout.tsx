@@ -1,11 +1,18 @@
+import { TableOfContents } from "@/components/ui/table-of-content"
+import { BackButton } from "@/components/ui/blog-back-button"
+
 export default function BlogSlugLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="px-6 py-10 pb-[calc(3.5rem+5px)]">
-      {children}
-    </div>
+    <>
+      <BackButton />
+      <TableOfContents />
+      <div className="xl:ml-72">
+        {children}
+      </div>
+    </>
   );
 }
