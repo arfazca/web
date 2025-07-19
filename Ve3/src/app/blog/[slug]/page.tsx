@@ -63,10 +63,7 @@ export default async function Blog({
   };
 }) {
   let post = await getPost(params.slug);
-
-  if (!post) {
-    notFound();
-  }
+  if (!post) { notFound(); }
 
   return (
     <section id="blog">
