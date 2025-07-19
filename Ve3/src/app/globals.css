@@ -237,13 +237,11 @@
     border: 1px solid hsl(var(--border));
   }
 
-  /* Remove backticks from prose inline code */
   .prose code:not([data-theme]):before,
   .prose code:not([data-theme]):after {
     content: "" !important;
   }
 
-  /* Ensure prose inline code uses theme colors */
   .prose code:not([data-theme]) {
     background-color: hsl(var(--muted)) !important;
     color: hsl(var(--foreground)) !important;
@@ -253,7 +251,6 @@
     font-weight: normal !important;
   }
 
-  /* Code blocks inside pre should not have background */
   pre > code {
     counter-reset: line;
     background-color: transparent !important;
@@ -416,6 +413,15 @@ body, html {
 
   .toc a:hover {
     color: hsl(var(--primary));
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
   }
 
   @keyframes pulse-green {

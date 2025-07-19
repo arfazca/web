@@ -1,11 +1,15 @@
 export default function BlogLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <div className="px-6 py-10 pb-[calc(3.5rem+5px)]">
-      {children}
+    <div className="min-h-screen bg-background">
+      <div className="w-full max-w-none mx-auto px-16 py-20">
+        <div className="w-full max-w-none">
+          {children}
+        </div>
+      </div>
     </div>
-  );
+  )
 }

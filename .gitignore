@@ -39,6 +39,7 @@
 # Ignoring Files
 .DS_Store
 commit-hist.txt
+tempor.mdx
 
 # Ignoring Directories (Illustrator Output Directories)
 1x*/
